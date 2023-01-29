@@ -1,25 +1,34 @@
 <template>
   <main class="container">
-    <Header title="Task Tracker" />
+    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
+
+    <div v-if="showAddTask">
+      <AddTask @add-task="addTask" />
+    </div>
+    
     <Tasks @toggle-task="toggleTask" @delete-task="deleteTask" :tasks="tasks"/>
   </main>
+  
 </template>
 
 <script>
 
 import Header from './components/Header.vue';
 import Tasks from './components/Tasks.vue';
+import AddTask from './components/AddTask.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Tasks    
+    Tasks,
+    AddTask,    
   },
   data() {
 
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false
     }
   },
 
@@ -63,6 +72,12 @@ export default {
         else
           return task;
       })
+    },
+    addTask(task) {
+      this.tasks = [...this.tasks, task];
+    },
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask;
     }
   }
 }
@@ -83,7 +98,8 @@ export default {
   border: 1px solid black;
   margin: 0 auto;
   margin-top: 60px;
-  max-width: 40rem;
+  max-width: 25rem;
   padding: 0 2rem;
+  padding-bottom: 1rem;
 }
 </style>
