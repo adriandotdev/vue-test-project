@@ -1,15 +1,21 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <button>Add Task</button>
+        <Button text="Add Task" color="green"/>
     </header>
 </template>
 
 <script>
+
+    import Button from './Button.vue';
+
     export default {
         name: 'Header',
         props: {
             title: String
+        },
+        components: {
+            Button
         }
     }
 </script>
@@ -20,15 +26,5 @@
         align-items: center;
         gap: 1rem;
         justify-content: space-between;
-    }
-
-    button {
-        padding: .5em;
-        font-size: 1rem;
-        cursor: pointer;
-        background: #171717;
-        outline: none;
-        border: none;
-        color: white;
     }
 </style>
