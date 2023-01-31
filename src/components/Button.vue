@@ -29,5 +29,6 @@
         border: none;
         color: white;
         border-radius: .5rem;
+        border: 1px solid rgb(47, 47, 47);
     }
 </style>

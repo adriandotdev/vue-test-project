@@ -4,9 +4,16 @@
             <label for="input-task">
                 Task
             </label>
-            <input v-model="task" type="text" name="input-task" id="input-task">
+            <input v-model="task" type="text" name="input-task" id="input-task" placeholder="Enter your task">
         </section>
-            
+        
+        <section class="task-field">
+            <label for="input-sched">
+                Schedule
+            </label>
+            <input v-model="sched" type="text" name="input-sched" id="input-sched" placeholder="Enter your task schedule">
+        </section>
+
         <section class="priority-section">
             <label for="">
                 Priority
@@ -15,35 +22,50 @@
         </section>
 
         <input type="submit" value="Save">
+            
     </form>
 
 </template>
 
 <script>
+
+    import { ref, watch, onMounted } from 'vue';
+
     export default {
         name: 'AddTask',
-        data() {
-            return {
-                task: '',
-                priority: false
-            }
-        },
-        methods: {
-            addTask(e) {
+
+        setup(_props, { emit }) {
+
+            let task = ref('');
+            let sched = ref('');
+            let priority = ref(false);
+
+            watch(task, (newValue, oldValue) => {
+                console.log(newValue + " : " + oldValue);
+            })
+
+            let addTask = (e) => {
 
                 e.preventDefault();
 
-                if (!this.task)
+                if (!task.value)
                     return;
 
                 const newTask = {
 
                     id: Math.random() * 10000000,
-                    priority: this.priority,
-                    text: this.task
+                    priority: priority.value,
+                    text: task.value
                 }
 
-                this.$emit('add-task', newTask);
+                emit('add-task', newTask);
+            }
+
+            return {
+                task,
+                sched,
+                priority,
+                addTask
             }
         }
     }

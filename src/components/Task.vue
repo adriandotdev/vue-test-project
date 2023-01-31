@@ -1,8 +1,13 @@
 <template>
     <div @dblclick="$emit('toggle-task', task.id)" :class="['task', task.priority ? 'border' : '']">
-        <h3>{{ task.text }}</h3>
-        
+
+        <section class="task-info">
+            <h3>{{ task.text }}</h3>
+            <p>{{ task.sched }}</p>
+        </section>
+
         <section class="buttons">
+            <button @click="$emit('delete-task', task.id)" id="btn-update">Update</button>
             <button @click="$emit('delete-task', task.id)" id="btn-delete">Delete</button>
         </section>
     </div>
@@ -25,6 +30,10 @@
 </script>
 
 <style scoped>
+* {
+        user-select: none;
+    }
+
     .task {
 
         background: rgb(238, 238, 238);
@@ -42,6 +51,11 @@
     h3 {
         user-select: none;
     }
+
+    .buttons {
+        display: flex;
+        gap: .5rem;
+    }
     #btn-delete {
         padding: .5em 1em;
         font-size: 1rem;
@@ -50,9 +64,19 @@
         border: none;
         color: white;
         border-radius: .5rem;
-        background-color: red;
+        background-color: rgb(194, 28, 28);
     }
 
+    #btn-update {
+        padding: .5em 1em;
+        font-size: 1rem;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        color: white;
+        border-radius: .5rem;
+        background-color: rgb(23, 23, 138);
+    }
     .border {
         border-left: 8px solid green;
     }

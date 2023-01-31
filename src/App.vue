@@ -1,89 +1,40 @@
 <template>
-  <main class="container">
-    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/>
+  <Navbar />
 
-    <div v-if="showAddTask">
-      <AddTask @add-task="addTask" />
-    </div>
-    
-    <Tasks @toggle-task="toggleTask" @delete-task="deleteTask" :tasks="tasks"/>
-  </main>
-  
+  <router-view></router-view>
+  <Footer />
 </template>
 
 <script>
 
-import Header from './components/Header.vue';
-import Tasks from './components/Tasks.vue';
-import AddTask from './components/AddTask.vue';
+import Footer from './components/Footer.vue';
+import Navbar from './components/Navbar.vue';
 
 export default {
   name: 'App',
   components: {
-    Header,
-    Tasks,
-    AddTask,    
+    Navbar,   
+    Footer
   },
   data() {
 
     return {
-      tasks: [],
       showAddTask: false
     }
   },
 
-  // Mostly you will use this for API calls
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        priority: true,
-        text: 'Learn Vue.js'
-      },
-      {
-        id: 2,
-        priority: false,
-        text: 'Learn Gitlab'
-      },
-      {
-        id: 3,
-        priority: true,
-        text: 'Learn More'
-      }
-    ]
-  },
-  methods: {
-    deleteTask(id) {
-      
-      if (confirm('Are you sure you want to delete this task?')) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
-      }
-    },
-    toggleTask(id) {
 
-      this.tasks = this.tasks.map(task => {
 
-        if (task.id === id) {
-          return {
-            ...task,
-            priority: !task.priority
-          }
-        }
-        else
-          return task;
-      })
-    },
-    addTask(task) {
-      this.tasks = [...this.tasks, task];
-    },
-    toggleAddTask() {
-      this.showAddTask = !this.showAddTask;
-    }
-  }
 }
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -93,6 +44,8 @@ export default {
   
 
 }
+
+
 
 .container {
   border: 1px solid black;
