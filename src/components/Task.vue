@@ -7,7 +7,7 @@
         </section>
 
         <section class="buttons">
-            <button @click="setUpdateModal(task.id)" id="btn-update">Update</button>
+            <button @click="openUpdateModal(task.id)" id="btn-update">Update</button>
             <button @click="deleteTask(task.id)" id="btn-delete">Delete</button>
         </section>
     </div>
@@ -18,7 +18,7 @@
 
     import { toRef } from 'vue';
     import Button from './Button.vue';
-    import { updateTask, setUpdateModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
+    import { updateTask, openUpdateModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
 
     export default {
 
@@ -32,7 +32,7 @@
                 updateTask,
                 deleteTask,
                 toggleTask,
-                setUpdateModal
+                openUpdateModal
             }
         },
         components: {

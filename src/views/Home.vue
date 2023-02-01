@@ -12,7 +12,7 @@
         
     </main>
 
-    <div @click="setUpdateModal()" class="modal-bg" v-if="isUpdating">
+    <div @click="openUpdateModal()" class="modal-bg" v-if="isUpdating">
         <form @submit="(e) => {
                 e.preventDefault();
                 updateTask()
@@ -46,7 +46,7 @@
 <script>
 
     import { ref } from 'vue';
-    import { tasksToRead, deleteTask, toggleTask, addTask, updateTask, isUpdating, setUpdateModal, uTask, uSched, uPriority } from '../composables/tasks_manager';
+    import { tasksToRead, deleteTask, toggleTask, addTask, updateTask, isUpdating, openUpdateModal, uTask, uSched, uPriority } from '../composables/tasks_manager';
     import Header from '../components/Header.vue';
     import AddTask from '../components/AddTask.vue';
     import Tasks from '../components/Tasks.vue';
@@ -69,7 +69,7 @@
                 showAddTask,
                 toggleAddTask,
                 isUpdating,
-                setUpdateModal,
+                openUpdateModal,
                 uTask,
                 uSched,
                 uPriority
