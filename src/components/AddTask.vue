@@ -1,5 +1,9 @@
 <template>
-    <form @submit="addTask" action="">
+    <form @submit="(e) => {
+
+            e.preventDefault();
+            addTask({text: task, sched, priority})
+        }" action="">
         <section class="task-field">
             <label for="input-task">
                 Task
@@ -28,8 +32,9 @@
 </template>
 
 <script>
-
-    import { ref, watch, onMounted } from 'vue';
+    
+    import { ref, watch } from 'vue';
+    import { addTask } from '../composables/tasks_manager';
 
     export default {
         name: 'AddTask',
@@ -43,23 +48,6 @@
             watch(task, (newValue, oldValue) => {
                 console.log(newValue + " : " + oldValue);
             })
-
-            let addTask = (e) => {
-
-                e.preventDefault();
-
-                if (!task.value)
-                    return;
-
-                const newTask = {
-
-                    id: Math.random() * 10000000,
-                    priority: priority.value,
-                    text: task.value
-                }
-
-                emit('add-task', newTask);
-            }
 
             return {
                 task,

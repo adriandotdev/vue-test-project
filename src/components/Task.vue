@@ -1,5 +1,5 @@
 <template>
-    <div @dblclick="$emit('toggle-task', task.id)" :class="['task', task.priority ? 'border' : '']">
+    <div @dblclick="toggleTask(task.id)" :class="['task', task.priority ? 'border' : '']">
 
         <section class="task-info">
             <h3>{{ task.text }}</h3>
@@ -7,21 +7,33 @@
         </section>
 
         <section class="buttons">
-            <button @click="$emit('delete-task', task.id)" id="btn-update">Update</button>
-            <button @click="$emit('delete-task', task.id)" id="btn-delete">Delete</button>
+            <button @click="setUpdateModal(task.id)" id="btn-update">Update</button>
+            <button @click="deleteTask(task.id)" id="btn-delete">Delete</button>
         </section>
     </div>
     
 </template>
 
 <script>
+
+    import { toRef } from 'vue';
     import Button from './Button.vue';
+    import { updateTask, setUpdateModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
 
     export default {
 
         name: 'Task',
         props: {
             task: Object
+        },
+        setup(props) {
+
+            return {
+                updateTask,
+                deleteTask,
+                toggleTask,
+                setUpdateModal
+            }
         },
         components: {
             Button
