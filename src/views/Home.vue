@@ -13,49 +13,59 @@
     </main>
 
     <div @click="openUpdateModal()" class="modal-bg" v-if="isUpdating">
-        <form @submit="(e) => {
-                e.preventDefault();
-                updateTask()
-            }" id="update-form" @click="(e) => e.stopPropagation()">
 
-            <section class="task-field">
-                <label for="task">Task:</label>
-                <input v-model="uTask" type="text" name="task" id="task">
-                {{ uTask }}
-            </section>
+        <div id="update-modal" @click="(e) => e.stopPropagation()">
 
-            <section class="task-field">
-                <label for="schedule">Schedule:</label>
-                <input v-model="uSched" type="text" name="schedule" id="task">
-            </section>
-
-
-            <section class="priority-section">
-                <label for="">
-                    Priority
-                </label>
-                <input v-model="uPriority" type="checkbox" name="" id="">
-            </section>
+            <h2>Update Task</h2>
             
-            <input type="submit" value="Save">
-        </form>
+            <form @submit="(e) => {
+                    e.preventDefault();
+                    updateTask()
+                }" id="update-form">
+            
+                <section class="task-field">
+                    <label for="task">Task:</label>
+                    <input v-model="uTask" type="text" name="task" id="task">
+                </section>
+            
+                <section class="task-field">
+                    <label for="schedule">Schedule:</label>
+                    <input v-model="uSched" type="text" name="schedule" id="schedule">
+                </section>
+            
+            
+                <section class="priority-section">
+                    <label for="update-priority">
+                        Priority
+                    </label>
+                    <input v-model="uPriority" type="checkbox" name="update-priority" id="update-priority">
+                </section>
+            
+                <input type="submit" value="Save">
+            </form>
+        </div>
+        
     </div>
     
 </template>
 
 <script>
 
+    //---------------------------STATES AND REF-------------------------------------
     import { ref } from 'vue';
     import { tasksToRead, deleteTask, toggleTask, addTask, updateTask, isUpdating, openUpdateModal, uTask, uSched, uPriority } from '../composables/tasks_manager';
+
+    //-------------------------COMPONENTS---------------------------------------
     import Header from '../components/Header.vue';
     import AddTask from '../components/AddTask.vue';
     import Tasks from '../components/Tasks.vue';
-    
+
     export default {
         setup() {
 
             let showAddTask = ref(false);
 
+            // A function that toggles the form for adding a new task.
             let toggleAddTask = () => {
                 showAddTask.value = !showAddTask.value;
             }
@@ -80,82 +90,37 @@
             AddTask,
             Tasks
         },
-        
-        // data() {
-
-        //     return {
-        //         tasks: [],
-        //         showAddTask: false
-        //     }
-        // },
-        // Mostly you will use this for API calls
-        // created() {
-        //     this.tasks = [
-        //         {
-        //             id: 1,
-        //             priority: true,
-        //             text: 'Learn Vue.js',
-        //             sched: 'November 23 @ 8 AM'
-        //         },
-        //         {
-        //             id: 2,
-        //             priority: false,
-        //             text: 'Learn Gitlab',
-        //             sched: 'November 23 @ 8 AM'
-        //         },
-        //         {
-        //             id: 3,
-        //             priority: true,
-        //             text: 'Learn More',
-        //             sched: 'November 23 @ 8 AM'
-        //         }
-        //     ]
-        // },
-        // methods: {
-        //     deleteTask(id) {
-
-        //         if (confirm('Are you sure you want to delete this task?')) {
-        //             this.tasks = this.tasks.filter(task => task.id !== id);
-        //         }
-        //     },
-        //     toggleTask(id) {
-
-        //         this.tasks = this.tasks.map(task => {
-
-        //             if (task.id === id) {
-        //                 return {
-        //                     ...task,
-        //                     priority: !task.priority
-        //                 }
-        //             }
-        //             else
-        //                 return task;
-        //         })
-        //     },
-        //     addTask(task) {
-        //         this.tasks = [...this.tasks, task];
-        //     },
-        //     toggleAddTask() {
-        //         this.showAddTask = !this.showAddTask;
-        //     }
-        // }
     }
 </script>
 
 <style scoped>
+    @keyframes open-modal {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
+
+    /* Modal Background */
     .modal-bg {
         
         min-width: 100vw;
         min-height: 100vh;
-        /* background: black; */
         position: fixed;
         top: 0;
 
+        /* Flex */
         display: flex;
         justify-content: center;
         align-items: center;
+        
     }
 
+    /* Serves as a background color to reduce the opacity. */
     .modal-bg::before {
 
         content: "";
@@ -168,14 +133,16 @@
         opacity: .1;
     }
 
-    #update-form {
+    #update-modal {
         background: white;
         max-width: 25rem;
         width: 100%;
         padding: 1rem;
         border-radius: .5rem;
+        animation: open-modal 300ms forwards;
     }
 
+    /* The input field */
     .task-field {
         display: flex;
         flex-direction: column;
@@ -183,6 +150,7 @@
         margin-bottom: 1rem;
     }
 
+    /* The checkbox section. */
     .priority-section {
         display: flex;
         gap: 1rem;
@@ -190,10 +158,12 @@
     }
 
 
-
+    /* Element Selectors */
     label {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
         align-self: flex-start;
+        user-select: none;
     }
 
     input {

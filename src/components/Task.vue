@@ -16,7 +16,6 @@
 
 <script>
 
-    import { toRef } from 'vue';
     import Button from './Button.vue';
     import { updateTask, openUpdateModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
 
@@ -26,7 +25,7 @@
         props: {
             task: Object
         },
-        setup(props) {
+        setup() {
 
             return {
                 updateTask,
@@ -42,7 +41,8 @@
 </script>
 
 <style scoped>
-* {
+    
+    * {
         user-select: none;
     }
 
@@ -64,10 +64,13 @@
         user-select: none;
     }
 
+    /* The container of task buttons */
     .buttons {
         display: flex;
         gap: .5rem;
     }
+
+    /* Delete Button */
     #btn-delete {
         padding: .5em 1em;
         font-size: 1rem;
@@ -79,6 +82,7 @@
         background-color: rgb(194, 28, 28);
     }
 
+    /* Update Button */
     #btn-update {
         padding: .5em 1em;
         font-size: 1rem;
