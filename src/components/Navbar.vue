@@ -20,10 +20,10 @@
        
 
         <ul ref="navlinks">
-            <li>
+            <li @click="closeNavLinks()">
                 <router-link to="/">Tasks</router-link>
             </li>
-            <li>
+            <li @click="closeNavLinks()">
                 <router-link to="/about">About</router-link>
             </li>
         </ul>
