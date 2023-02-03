@@ -133,6 +133,7 @@ let openUpdateModal = (id) => {
     }
 }
 
+/** A function that opens the DELETE modal */
 let openDeleteModal = (id) => {
 
     isModalOpen.value = true;
@@ -149,6 +150,13 @@ let openDeleteModal = (id) => {
     }
 }
 
+/** A function that closes the modal
+ * 
+ * The two modals are the Update and Delete modal. 
+ * 
+ * the UPDATE modal will only render when the 'isUpdating' is true, while the
+ * DELETE modal only renders when the 'isDeleting' is true.
+ * */
 function closeModal () {
     isModalOpen.value = false;
     isUpdating.value = false;
@@ -186,6 +194,7 @@ let updateTask = () => {
     closeModal();
 }
 
+/** A function that opens the navbar menu */
 let openNavbar = (isOpen) => {
 
     isNavbarMenuOpen.value = isOpen;
