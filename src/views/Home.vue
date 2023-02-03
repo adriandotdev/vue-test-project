@@ -12,9 +12,9 @@
         
     </main>
 
-    <div @click="openUpdateModal()" class="modal-bg" v-if="isUpdating">
+    <div @click="closeModal()" class="modal-bg" v-if="isModalOpen">
 
-        <div id="update-modal" @click="(e) => e.stopPropagation()">
+        <div v-if="isUpdating" id="update-modal" @click="(e) => e.stopPropagation()">
 
             <h2>Update Task</h2>
             
@@ -45,6 +45,22 @@
             </form>
         </div>
         
+        <div v-if="isDeleting" id="delete-modal" @click="(e) => e.stopPropagation()">
+            
+            <div>
+                <p id="p-delete-message">Are you sure you want to delete this task?</p>
+                <p id="span-item-delete">{{ dTask }}</p>
+            </div>
+            
+            <section class="buttons">
+                <button @click="deleteTask()" class="btn-delete-buttons" id="btn-confirm">
+                    Delete
+                </button>
+                <button @click="closeModal()" class="btn-delete-buttons" id="btn-cancel">
+                    Cancel
+                </button>
+            </section>
+        </div>
     </div>
     
 </template>
@@ -53,7 +69,7 @@
 
     //---------------------------STATES AND REF-------------------------------------
     import { ref } from 'vue';
-    import { tasksToRead, deleteTask, toggleTask, addTask, updateTask, isUpdating, openUpdateModal, uTask, uSched, uPriority } from '../composables/tasks_manager';
+    import { tasksToRead, deleteTask, toggleTask, addTask, updateTask, isUpdating, isDeleting, isModalOpen, openUpdateModal, uTask, uSched, uPriority, dTask, closeModal } from '../composables/tasks_manager';
 
     //-------------------------COMPONENTS---------------------------------------
     import Header from '../components/Header.vue';
@@ -78,11 +94,15 @@
                 updateTask,
                 showAddTask,
                 toggleAddTask,
+                closeModal,
                 isUpdating,
+                isDeleting,
+                isModalOpen,
                 openUpdateModal,
                 uTask,
                 uSched,
-                uPriority
+                uPriority,
+                dTask
             }
         },
         components: {
@@ -94,6 +114,7 @@
 </script>
 
 <style scoped>
+    /* Animation of modal if it is on desktop screen size */
     @keyframes open-modal {
         from {
             opacity: 0;
@@ -105,6 +126,18 @@
         }
     }
 
+    /* Animation of modals when it is on mobile screen size */
+    @keyframes open-modal-mobile {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
     /* Modal Background */
     .modal-bg {
         
@@ -116,8 +149,7 @@
         /* Flex */
         display: flex;
         justify-content: center;
-        align-items: center;
-        
+        align-items: end;
     }
 
     /* Serves as a background color to reduce the opacity. */
@@ -133,13 +165,26 @@
         opacity: .1;
     }
 
-    #update-modal {
+    #p-delete-message {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    #span-item-delete {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: red;
+        text-align: left;
+    }
+
+    #update-modal, #delete-modal {
         background: white;
-        max-width: 25rem;
+        /* max-width: 25rem; */
         width: 100%;
-        padding: 1rem;
+        padding: 0rem 1rem 1rem 1rem;
         border-radius: .5rem;
-        animation: open-modal 300ms forwards;
+        border: 1px solid #ccc;
+        animation: open-modal-mobile 200ms forwards;
     }
 
     /* The input field */
@@ -185,5 +230,68 @@
     input[type="submit"]:hover {
 
         transform: translateY(-.2rem);
+    }
+
+
+    #delete-modal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 15rem;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 1rem;
+
+        align-self: flex-end;
+        margin-top: 2rem;
+    }
+
+    .btn-delete-buttons {
+        padding: .8em;
+        border: none;
+        border-radius: .5rem;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        font-family: Helvetica, arial;
+        transition: all 200ms;
+        cursor: pointer;
+    }
+
+    #btn-confirm {
+        background-color: rgb(194, 28, 28);
+    }
+
+    #btn-confirm:hover {
+        background-color: rgb(148, 25, 25);
+    }
+
+    #btn-cancel {
+        color: #171717;
+        border: 1px solid #171717;
+    }
+
+    #btn-cancel:hover {
+        background-color: #171717;
+        color: white;
+    }
+
+    @media only screen and (min-width: 720px) {
+
+        .modal-bg {
+            align-items: center;
+        }
+        
+        #update-modal, #delete-modal {
+            max-width: 25rem;
+            animation: open-modal 200ms forwards;
+        }
+
+        #delete-modal {
+            min-height: auto;
+        }
     }
 </style>

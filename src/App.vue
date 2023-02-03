@@ -26,31 +26,57 @@ export default {
 </script>
 
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-}
+@keyframes containerOnLoadAnimation {
+      
+    from {
+      opacity: 0;
+      transform: translateY(500px);
+    }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-}
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    
+
+  }
 
 
 
 .container {
-  border: 1px solid black;
-  margin: 0 auto;
-  margin-top: 60px;
+  
+  margin: 5rem auto;
+  margin-bottom: 0;
+  /* margin-top: 60px; */
   max-width: 25rem;
   padding: 0 2rem;
   padding-bottom: 1rem;
+  border-radius: .7rem;
+  
+  animation: containerOnLoadAnimation 300ms forwards;
+}
+
+
+@media only screen and (min-width: 540px) {
+
+  .container {
+    border: 1px solid black;
+    margin-top: 7rem;
+  }
 }
 </style>

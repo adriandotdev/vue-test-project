@@ -26,7 +26,8 @@
     header {
         display: flex;
         align-items: center;
-        gap: 1rem;
         justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
     }
 </style>

@@ -24,7 +24,10 @@ let tasks = ref( [
     }
 ] );
 
+let isModalOpen = ref(false);
 let isUpdating = ref(false);
+let isDeleting = ref(false);
+
 let tasksToRead = readonly(tasks);
 
 // ----------------------------------------------------------------
@@ -35,6 +38,19 @@ let uTaskID = ref('');
 let uTask = ref('');
 let uSched = ref('');
 let uPriority = ref(false);
+
+
+//----------------------------------------------------------------
+/**
+ * Properties Needed for Deleting Task
+ */
+
+let dID = ref('');
+let dTask = ref('');
+
+//----------------------------------------------------------------
+/** Property for opening navbar */
+let isNavbarMenuOpen = ref (false);
 //-----------------------END OF PROPERTIES OF TASK TRACKER-----------------------------------------
 
 
@@ -48,11 +64,10 @@ let uPriority = ref(false);
  * 
  * @param id
  * - a unique id of the task to find in the list. */
-let deleteTask = (id) => {
+let deleteTask = () => {
 
-    if (confirm('Are you sure you want to delete this task?')) {
-        tasks.value = tasks.value.filter(task => task.id !== id);
-    }
+    tasks.value = tasks.value.filter(task => task.id !== dID.value);
+    closeModal();
 }
 
 /**
@@ -101,7 +116,9 @@ let addTask = (task) => {
 let openUpdateModal = (id) => {
 
     // Sets the update modal to whatever the opposite value of isUpdating property.
-    isUpdating.value = !isUpdating.value;
+    isModalOpen.value = !isModalOpen.value;
+    isDeleting.value = false;
+    isUpdating.value = true;
 
     uTaskID.value = id; // sets the param id to uTaskID property.
 
@@ -116,10 +133,36 @@ let openUpdateModal = (id) => {
     }
 }
 
+let openDeleteModal = (id) => {
+
+    isModalOpen.value = true;
+    isUpdating.value = false;
+    isDeleting.value = true;
+
+    dID.value = id;
+
+    let taskToDelete = tasks.value.find(task => task.id === id);
+
+    if (taskToDelete !== null && taskToDelete !== undefined) {
+
+        dTask.value = taskToDelete.text;
+    }
+}
+
+function closeModal () {
+    isModalOpen.value = false;
+    isUpdating.value = false;
+    isDeleting.value = false;
+}
+
 /**
  * A function that updates the task. */
 let updateTask = () => {
 
+    if (!uTask.value || !uSched.value) {
+
+        alert("Task and Schedule must not be empty."); return;
+    }
     // Created new object with the updated value for the text, sched, priority.
     let taskToUpdate = {
 
@@ -140,6 +183,12 @@ let updateTask = () => {
 
     // Set to false to close the modal.
     isUpdating.value = false;
+    closeModal();
 }
 
-export { tasksToRead, isUpdating, uTask, uSched, uPriority, deleteTask, toggleTask, addTask, updateTask, openUpdateModal }
+let openNavbar = (isOpen) => {
+
+    isNavbarMenuOpen.value = isOpen;
+}
+
+export { tasksToRead, isModalOpen, isUpdating, isDeleting, uTask, uSched, uPriority, dTask, isNavbarMenuOpen, openNavbar, deleteTask, toggleTask, addTask, updateTask, openUpdateModal, closeModal, openDeleteModal }

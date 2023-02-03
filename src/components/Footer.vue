@@ -12,7 +12,7 @@
 
 <style scoped>
     footer {
-        margin-top: 1.5rem;
+        margin-top: 0rem;
     }
 
     p {

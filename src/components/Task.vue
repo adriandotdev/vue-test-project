@@ -8,7 +8,7 @@
 
         <section class="buttons">
             <button @click="openUpdateModal(task.id)" id="btn-update">Update</button>
-            <button @click="deleteTask(task.id)" id="btn-delete">Delete</button>
+            <button @click="openDeleteModal(task.id)" id="btn-delete">Delete</button>
         </section>
     </div>
     
@@ -17,7 +17,7 @@
 <script>
 
     import Button from './Button.vue';
-    import { updateTask, openUpdateModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
+    import { updateTask, openUpdateModal, openDeleteModal, deleteTask, toggleTask } from '@/composables/tasks_manager';
 
     export default {
 
@@ -31,6 +31,7 @@
                 updateTask,
                 deleteTask,
                 toggleTask,
+                openDeleteModal,
                 openUpdateModal
             }
         },
@@ -49,15 +50,16 @@
     .task {
 
         background: rgb(238, 238, 238);
-        padding: .5rem 1rem .5rem 1.5rem;
+        padding: .5rem 1rem 1rem 1.5rem;
         margin: .5rem 0;
         text-align: left;
         border-radius: .5rem;
 
         /* layout */
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     h3 {
@@ -68,6 +70,7 @@
     .buttons {
         display: flex;
         gap: .5rem;
+        align-self: flex-end;
     }
 
     /* Delete Button */

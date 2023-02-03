@@ -19,10 +19,10 @@
         </section>
 
         <section class="priority-section">
-            <label for="">
+            <label for="priority">
                 Priority
             </label>
-            <input v-model="priority" type="checkbox" name="" id="">
+            <input v-model="priority" type="checkbox" name="priority" id="priority">
         </section>
 
         <input type="submit" value="Save">
