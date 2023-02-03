@@ -169,6 +169,7 @@
     .delete-modal__confirm-message {
         font-weight: bold;
         text-align: left;
+        word-break: break-all;
         color: var(--btn-update-primary);
     }
 
@@ -177,6 +178,7 @@
         font-weight: bold;
         color: var(--btn-delete-primary);
         text-align: left;
+        word-break: break-all;
     }
 
     .modal-bg--update-modal, .modal-bg--delete-modal {

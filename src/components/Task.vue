@@ -42,7 +42,7 @@
 </script>
 
 <style>
-    :root {
+:root {
         --btn-update-primary: #062459;
         --btn-update-border: #0d1e3b;
         --btn-update-hover: #0d1e3b;
@@ -74,16 +74,18 @@
 
     .task--info__title {
         user-select: none;
-        white-space: pre-wrap;
+        word-break: break-all;
         font-size: 1.5rem;
         margin: 1rem 0 0 0;
         font-family: Poppins, sans-serif;
+        color: var(--btn-update-primary);
     }
 
     .task--info__schedule {
         font-style: italic;
         font-weight: 600;
-        color: rgb(1, 1, 83);
+        word-break: break-all;
+        color: var(--btn-update-hover);
     }
 
     /* The container of task buttons */
