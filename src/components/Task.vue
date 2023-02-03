@@ -64,6 +64,7 @@
 
     h3 {
         user-select: none;
+        white-space: pre-wrap;
     }
 
     /* The container of task buttons */
