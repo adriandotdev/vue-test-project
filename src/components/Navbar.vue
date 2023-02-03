@@ -1,12 +1,14 @@
 <template>
     <nav @resize="() => console.log('resizing')">
-        <h1>Task Tracker</h1>
 
-        
+        <h1 id="nav__title">
+            Task Tracker
+        </h1>
+
         <label tabindex="1" v-if="!hamburgerCheck" class="hamburger" for="hamburger">
-            <hr>
-            <hr>
-            <hr>
+            <hr class="hamburger__line">
+            <hr class="hamburger__line">
+            <hr class="hamburger__line">
             <input v-model="hamburgerCheck" type="checkbox" name="hamburger" id="hamburger">
         </label>
 
@@ -19,7 +21,7 @@
         </a>
        
 
-        <ul ref="navlinks">
+        <ul class="nav__items nav__items--mobile" ref="navlinks">
             <li @click="closeNavLinks()">
                 <router-link to="/">Tasks</router-link>
             </li>
@@ -28,7 +30,7 @@
             </li>
         </ul>
 
-        <ul id="desktop-links">
+        <ul class="nav__items nav__items--desktop" id="desktop-links">
             <li>
                 <router-link to="/">Tasks</router-link>
             </li>
@@ -54,7 +56,6 @@
 
             let closeNavLinks = () => {
                 hamburgerCheck.value = false;
-                // navlinks.value.style.animation = 'navLinksCloseAnim 200ms forwards';
             }
 
             watch(hamburgerCheck, (hamOpen) => {
@@ -94,10 +95,26 @@
 </script>
 
 <style scoped>
+
+    /* Animation for opening the navigation links. */
+    @keyframes navLinksOpenAnim {
+    
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Navbar */
     nav {
 
         display: flex;
-        background-color: #171717;
+        background-color: var(--btn-update-primary);
         padding: 0 1rem;
         align-items: center;
         justify-content: space-between;
@@ -109,50 +126,44 @@
         z-index: 1;
     }
 
-    h1 {
+    #nav__title {
         color: #fff;
     }
 
-    @keyframes navLinksOpenAnim {
-
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .nav__items {
+        display: flex;
+        gap: 1rem;
+        list-style-type: none;
     }
 
-    ul {
+    /* Navbar items container */
+    .nav__items--mobile {
         display: none;
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
 
-        list-style-type: none;
+        
         position: absolute;
         top: 70%;
         left: 0;
         width: 100%;
         padding: 0 0 1rem 2rem;
-        background: #171717;
+        background: var(--btn-update-primary);
         z-index: 1;
-        /* display: none; */
+
         animation: navLinksOpenAnim  200ms ease forwards;
     }
 
-    a {
-        text-decoration: none;
-        color: white;
-        font-size: 1.2rem;
+    .nav__items--desktop {
+        display: none;
     }
 
     .hamburger {
         cursor: pointer;
     }
-    hr {
+    
+    .hamburger__line {
         width: 35px;
         color: white;
         height: 2px;
@@ -166,11 +177,15 @@
 
     a {
         width: 1.1rem;
+        text-decoration: none;
         cursor: pointer;
+        color: white;
     }
+
+    /* Tablet size */
     @media only screen and (min-width: 768px) {
 
-        ul {
+        .nav__items--mobile {
             display: flex;
             position: relative;
             flex-direction: row;
@@ -179,6 +194,11 @@
             width: auto;
             align-items: center;
         }
+
+        .nav__items--desktop {
+            display: flex;
+        }
+
         .hamburger {
             display: none;
         }

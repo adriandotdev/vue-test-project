@@ -1,31 +1,31 @@
 <template>
-    <form @submit="(e) => {
+    <form class="form" @submit="(e) => {
 
             e.preventDefault();
             addTask({text: task, sched, priority})
         }" action="">
-        <section class="task-field">
-            <label for="input-task">
+        <section class="form__task-field">
+            <label class="form__label" for="input-task">
                 Task
             </label>
-            <input v-model="task" type="text" name="input-task" id="input-task" placeholder="Enter your task">
+            <input class="form__input" v-model="task" type="text" name="input-task" id="input-task" placeholder="Enter your task">
         </section>
         
-        <section class="task-field">
-            <label for="input-sched">
+        <section class="form__task-field">
+            <label class="form__label" for="input-sched">
                 Schedule
             </label>
-            <input v-model="sched" type="text" name="input-sched" id="input-sched" placeholder="Enter your task schedule">
+            <input class="form__input" v-model="sched" type="text" name="input-sched" id="input-sched" placeholder="Enter your task schedule">
         </section>
 
-        <section class="priority-section">
-            <label for="priority">
+        <section class="form__priority-section">
+            <label class="form__label" for="priority">
                 Priority
             </label>
             <input v-model="priority" type="checkbox" name="priority" id="priority">
         </section>
 
-        <input type="submit" value="Save">
+        <input class="form__btn--submit" type="submit" value="Save">
             
     </form>
 
@@ -60,39 +60,35 @@
 </script>
 
 <style scoped>
-
-    form {
+.form {
         margin-bottom: 1rem;
     }
-    .task-field {
+    .form__task-field {
         display: flex;
         flex-direction: column;
         gap: .5rem;
         margin-bottom: 1rem;
     }
 
-    .priority-section {
+    .form__priority-section {
         display: flex;
         gap: 1rem;
         margin-bottom: 1rem;
     }
 
-
-
-    label {
+    .form__label {
         font-size: 1.5rem;
         align-self: flex-start;
     }
 
-    input {
-
+    .form__input {
         padding: .5rem;
     }
 
-    input[type="submit"] {
+    .form__btn--submit {
         width: 100%;
         border: none;
-        background: black;
+        background: #020917;
         color: white;
         padding: .5em;
         font-size: 1.1rem;
@@ -100,7 +96,7 @@
         transition: transform 200ms;
     }
 
-    input[type="submit"]:hover {
+    .form__btn--submit:hover {
 
         transform:translateY(-.2rem); 
     }

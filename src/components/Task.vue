@@ -1,14 +1,14 @@
 <template>
     <div @dblclick="toggleTask(task.id)" :class="['task', task.priority ? 'border' : '']">
 
-        <section class="task-info">
-            <h3>{{ task.text }}</h3>
-            <p>{{ task.sched }}</p>
+        <section class="task--info">
+            <h3 class="task--info__title">{{ task.text }}</h3>
+            <p class="task--info__schedule">{{ task.sched }}</p>
         </section>
 
         <section class="buttons">
-            <button @click="openUpdateModal(task.id)" id="btn-update">Update</button>
-            <button @click="openDeleteModal(task.id)" id="btn-delete">Delete</button>
+            <button class="buttons__btn--update" @click="openUpdateModal(task.id)" id="buttons__btn--update">Update</button>
+            <button class="buttons__btn--delete" @click="openDeleteModal(task.id)" id="buttons__btn--delete">Delete</button>
         </section>
     </div>
     
@@ -41,8 +41,18 @@
     }
 </script>
 
-<style scoped>
-    
+<style>
+    :root {
+        --btn-update-primary: #062459;
+        --btn-update-border: #0d1e3b;
+        --btn-update-hover: #0d1e3b;
+
+        --btn-delete-primary: #CB3436;
+        --btn-delete-border: #701a1b;
+        --btn-delete-hover: #701a1b;
+        /* border: 1px solid #701a1b; */
+    }
+
     * {
         user-select: none;
     }
@@ -62,9 +72,18 @@
         flex-wrap: wrap;
     }
 
-    h3 {
+    .task--info__title {
         user-select: none;
         white-space: pre-wrap;
+        font-size: 1.5rem;
+        margin: 1rem 0 0 0;
+        font-family: Poppins, sans-serif;
+    }
+
+    .task--info__schedule {
+        font-style: italic;
+        font-weight: 600;
+        color: rgb(1, 1, 83);
     }
 
     /* The container of task buttons */
@@ -75,7 +94,7 @@
     }
 
     /* Delete Button */
-    #btn-delete {
+    #buttons__btn--delete {
         padding: .5em 1em;
         font-size: 1rem;
         cursor: pointer;
@@ -83,11 +102,13 @@
         border: none;
         color: white;
         border-radius: .5rem;
-        background-color: rgb(194, 28, 28);
+        background-color: var(--btn-delete-primary);
+        border: 1px solid var(--btn-delete-border);
+        transition: background 300ms;
     }
 
     /* Update Button */
-    #btn-update {
+    #buttons__btn--update {
         padding: .5em 1em;
         font-size: 1rem;
         cursor: pointer;
@@ -95,7 +116,17 @@
         border: none;
         color: white;
         border-radius: .5rem;
-        background-color: rgb(23, 23, 138);
+        background-color: var(--btn-update-primary);
+        border: 1px solid var(--btn-update-border);
+        transition: background 300ms;
+    }
+
+    #buttons__btn--delete:hover {
+        background-color: var(--btn-delete-hover);
+    }   
+
+    #buttons__btn--update:hover {
+        background-color: var(--btn-update-hover);
     }
     .border {
         border-left: 8px solid green;

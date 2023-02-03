@@ -2,7 +2,7 @@
     <div id="tasks" :key="task.id" v-for="task in tasks">
         <Task :task="task"/>
     </div>
-    <h1 v-if="tasks.length === 0">No Tasks</h1>
+    <h1 v-if="tasks.length === 0">No Pending Tasks</h1>
 </template>
 
 <script>

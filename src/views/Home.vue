@@ -14,42 +14,42 @@
 
     <div @click="closeModal()" class="modal-bg" v-if="isModalOpen">
 
-        <div v-if="isUpdating" id="update-modal" @click="(e) => e.stopPropagation()">
+        <div class="modal-bg--update-modal" v-if="isUpdating" id="update-modal" @click="(e) => e.stopPropagation()">
 
             <h2>Update Task</h2>
             
-            <form @submit="(e) => {
+            <form class="form" @submit="(e) => {
                     e.preventDefault();
                     updateTask()
                 }" id="update-form">
             
-                <section class="task-field">
-                    <label for="task">Task:</label>
-                    <input v-model="uTask" type="text" name="task" id="task">
+                <section class="form__task-field">
+                    <label class="form__label" for="task">Task:</label>
+                    <input class="form__input" v-model="uTask" type="text" name="task" id="task">
                 </section>
             
-                <section class="task-field">
-                    <label for="schedule">Schedule:</label>
-                    <input v-model="uSched" type="text" name="schedule" id="schedule">
+                <section class="form__task-field">
+                    <label class="form__label" for="schedule">Schedule:</label>
+                    <input class="form__input" v-model="uSched" type="text" name="schedule" id="schedule">
                 </section>
             
             
                 <section class="priority-section">
-                    <label for="update-priority">
+                    <label class="form__label" for="update-priority">
                         Priority
                     </label>
                     <input v-model="uPriority" type="checkbox" name="update-priority" id="update-priority">
                 </section>
             
-                <input type="submit" value="Save">
+                <input class="form__btn--submit" type="submit" value="Save">
             </form>
         </div>
         
-        <div v-if="isDeleting" id="delete-modal" @click="(e) => e.stopPropagation()">
+        <div class="modal-bg--delete-modal" v-if="isDeleting" id="delete-modal" @click="(e) => e.stopPropagation()">
             
             <div>
-                <p id="p-delete-message">Are you sure you want to delete this task?</p>
-                <p id="span-item-delete">{{ dTask }}</p>
+                <p class="delete-modal__confirm-message" id="p-delete-message">Are you sure you want to delete this task?</p>
+                <p class="delete-modal__item-text" id="span-item-delete">{{ dTask }}</p>
             </div>
             
             <section class="buttons">
@@ -114,7 +114,7 @@
 </script>
 
 <style scoped>
-    /* Animation of modal if it is on desktop screen size */
+/* Animation of modal if it is on desktop screen size */
     @keyframes open-modal {
         from {
             opacity: 0;
@@ -138,6 +138,7 @@
             transform: translateY(0px);
         }
     }
+
     /* Modal Background */
     .modal-bg {
         
@@ -165,19 +166,20 @@
         opacity: .1;
     }
 
-    #p-delete-message {
+    .delete-modal__confirm-message {
         font-weight: bold;
         text-align: left;
+        color: var(--btn-update-primary);
     }
 
-    #span-item-delete {
+    .delete-modal__item-text {
         font-size: 1.5rem;
         font-weight: bold;
-        color: red;
+        color: var(--btn-delete-primary);
         text-align: left;
     }
 
-    #update-modal, #delete-modal {
+    .modal-bg--update-modal, .modal-bg--delete-modal {
         background: white;
         /* max-width: 25rem; */
         width: 100%;
@@ -188,7 +190,7 @@
     }
 
     /* The input field */
-    .task-field {
+    .form__task-field {
         display: flex;
         flex-direction: column;
         gap: .5rem;
@@ -202,24 +204,23 @@
         margin-bottom: 1rem;
     }
 
-
     /* Element Selectors */
-    label {
+    .form__label {
         font-size: 1.2rem;
         font-weight: bold;
         align-self: flex-start;
         user-select: none;
     }
 
-    input {
+    .form__input {
 
         padding: .5rem;
     }
 
-    input[type="submit"] {
+    .form__btn--submit {
         width: 100%;
         border: none;
-        background: black;
+        background: #020917;
         color: white;
         padding: .5em;
         font-size: 1.1rem;
@@ -227,13 +228,12 @@
         transition: transform 200ms;
     }
 
-    input[type="submit"]:hover {
+    .form__btn--submit:hover {
 
         transform: translateY(-.2rem);
     }
 
-
-    #delete-modal {
+    .modal-bg--delete-modal {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -262,20 +262,21 @@
     }
 
     #btn-confirm {
-        background-color: rgb(194, 28, 28);
+        background-color: var(--btn-delete-primary);
+        border: 1px solid var(--btn-delete-border);
     }
 
     #btn-confirm:hover {
-        background-color: rgb(148, 25, 25);
+        background-color: var(--btn-delete-hover);
     }
 
     #btn-cancel {
-        color: #171717;
-        border: 1px solid #171717;
+        color: var(--btn-update-primary);
+        border: 1px solid var(--btn-update-border);
     }
 
     #btn-cancel:hover {
-        background-color: #171717;
+        background-color: var(--btn-update-primary);
         color: white;
     }
 
@@ -285,12 +286,12 @@
             align-items: center;
         }
         
-        #update-modal, #delete-modal {
+        .modal-bg--update-modal, .modal-bg--delete-modal {
             max-width: 25rem;
             animation: open-modal 200ms forwards;
         }
 
-        #delete-modal {
+        .modal-bg--delete-modal {
             min-height: auto;
         }
     }

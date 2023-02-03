@@ -32,6 +32,7 @@
         font-size: 3rem;
         animation: scrollUp 500ms forwards;
         opacity: 0;
+        color: var(--btn-update-primary);
     }
     p {
         opacity: 0;
