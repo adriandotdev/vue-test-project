@@ -27,6 +27,13 @@ This is the fifth project for our OJT. A simple CRUD User Management System. I u
 
 <hr>
 
+### Technologies Used
+- Vue.js
+- Quasar
+- Axios
+
+<hr>
+
 **Created by:** Adrian Nads L. Marcelo 
 
 Links and Socials:
