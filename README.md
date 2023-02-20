@@ -1,18 +1,18 @@
-# OVERVIEW FOR THIS PROJECT
+# PROJECT OVERVIEW
 This is the fifth project for our OJT. A simple CRUD User Management System. We utilize what we learned on the previous projects such as Vue.js, Quasar, and Axios.
 <hr>
 
 ![Overview](https://user-images.githubusercontent.com/63532775/220000995-3d53a694-6700-4da6-8c82-1020b0d252c0.gif)
 
-## ADDING NEW USER
+## ADD NEW USER
 
 ![Add Task](https://user-images.githubusercontent.com/63532775/220000634-74bddc6e-5afc-4ca8-bb58-879e47e46359.gif)
 
-## UPDATING USER DETAILS
+## UPDATE USER DETAILS
 
 ![Update User](https://user-images.githubusercontent.com/63532775/220000857-a5cae7bb-8d8b-4b58-997b-62d2c2e63659.gif)
 
-## DELETING USER
+## DELETE USER
 
 ![Delete User](https://user-images.githubusercontent.com/63532775/220000760-ecb37c6e-7d30-4998-99c0-913fc65b238c.gif)
 
@@ -27,5 +27,11 @@ This is the fifth project for our OJT. A simple CRUD User Management System. We 
 <hr>
 
 **Created by:** Adrian Nads L. Marcelo 
+
 Links and Socials:
-Portfolio: 
+
+Portfolio: https://adriandotdev.netlify.app/
+
+LinkedIn: https://www.linkedin.com/in/adrian-marcelo/
+
+Github: https://github.com/adriandotdev/
