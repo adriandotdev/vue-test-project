@@ -1,5 +1,5 @@
 # PROJECT OVERVIEW
-This is the fifth project for our OJT. A simple CRUD User Management System. We utilize what we learned on the previous projects such as Vue.js, Quasar, and Axios.
+This is the fifth project for our OJT. A simple CRUD User Management System. I utilized what I learned from the previous projects that assigned to me for the past couple of days.
 <hr>
 
 ![Overview](https://user-images.githubusercontent.com/63532775/220000995-3d53a694-6700-4da6-8c82-1020b0d252c0.gif)
@@ -23,6 +23,7 @@ This is the fifth project for our OJT. A simple CRUD User Management System. We 
 - Implemented the basics of HTTP Reqeuest (GET, POST, PUT, and DELETE)
 - Learned how to use other components such as QLoader, and QDialog.
 - Learned how to setup basic routing.
+- Learned how to handle forms such as utilizing regular expressions at :rules of each input fields.
 
 <hr>
 
